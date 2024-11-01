@@ -1,4 +1,10 @@
-import { Center, OrbitControls, useGLTF, useTexture } from "@react-three/drei";
+import {
+  Center,
+  OrbitControls,
+  Sparkles,
+  useGLTF,
+  useTexture,
+} from "@react-three/drei";
 
 export default function Experience() {
   const { nodes } = useGLTF("./model/portal.glb");
@@ -40,6 +46,14 @@ export default function Experience() {
         >
           <meshBasicMaterial color={"#ffffe5"} />
         </mesh>
+
+        <Sparkles
+          size={6}
+          count={40}
+          position-y={1}
+          scale={[4, 2, 4]}
+          speed={1}
+        />
       </Center>
     </>
   );
