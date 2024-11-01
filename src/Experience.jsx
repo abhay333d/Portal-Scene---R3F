@@ -1,15 +1,46 @@
-import { OrbitControls } from '@react-three/drei'
+import { Center, OrbitControls, useGLTF, useTexture } from "@react-three/drei";
 
-export default function Experience()
-{
-    return <>
+export default function Experience() {
+  const { nodes } = useGLTF("./model/portal.glb");
+  const bakedTexture = useTexture("./model/baked.jpg");
+  bakedTexture.flipY = false;
+  return (
+    <>
+      <color args={["#030202"]} attach={"background"} />
+      <OrbitControls makeDefault />
 
-        <OrbitControls makeDefault />
-
-        <mesh scale={ 1.5 }>
-            <boxGeometry />
-            <meshNormalMaterial />
+      <Center>
+        <mesh geometry={nodes.baked.geometry}>
+          <meshBasicMaterial map={bakedTexture} />
         </mesh>
 
+        <mesh
+          geometry={nodes.poleLightA.geometry}
+          position={nodes.poleLightA.position}
+          rotation={nodes.poleLightA.rotation}
+          scale={nodes.poleLightA.scale}
+        >
+          <meshBasicMaterial color={"#ffffe5"} />
+        </mesh>
+
+        <mesh
+          geometry={nodes.poleLightB.geometry}
+          position={nodes.poleLightB.position}
+          rotation={nodes.poleLightB.rotation}
+          scale={nodes.poleLightB.scale}
+        >
+          <meshBasicMaterial color={"#ffffe5"} />
+        </mesh>
+
+        <mesh
+          geometry={nodes.protalLight.geometry}
+          position={nodes.protalLight.position}
+          rotation={nodes.protalLight.rotation}
+          scale={nodes.protalLight.scale}
+        >
+          <meshBasicMaterial color={"#ffffe5"} />
+        </mesh>
+      </Center>
     </>
+  );
 }
